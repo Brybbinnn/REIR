@@ -1,4 +1,4 @@
-// import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class PercolationStats {
@@ -6,7 +6,7 @@ public class PercolationStats {
     public static int iter;
     public static int x;
     public static int y;
-    public static int tests[];
+    public static double tests[];
     public static int counter;
 
 
@@ -17,12 +17,12 @@ public class PercolationStats {
         }
         iter = T;
         size = N;
-        tests = new int[T];
+        tests = new double[T];
         for (int i = 0; i < T; i++) {
             testPercolation(i);
-            System.out.println(tests[i]);
+            //System.out.println(tests[i]);
         }
-
+        
     }   
     public static void testPercolation(int index) {
         Percolation p = new Percolation(size);
@@ -33,12 +33,12 @@ public class PercolationStats {
             p.open(x, y);
             counter++;
         }
-        tests[index] = p.numberOfOpenSites();
+        tests[index] = counter/((double)size*size);
     }
     
 
     public double mean(){
-        return 0;
+        return StdStats.mean(tests); 
     }
 
     public double stddev(){
@@ -46,6 +46,7 @@ public class PercolationStats {
     }
 
     public static void main(String[] args) {
-        PercolationStats per = new PercolationStats(4, 20);
+        //PercolationStats per = new PercolationStats(100, 200);
+        //System.out.println(per.mean());
     }
 }
