@@ -24,12 +24,10 @@ public class Percolation {
     public static void setParents(){
         for(int i = 0; i < length; i++){
             uf.union(head, input2dto1d(0, i));
-            System.out.println(uf.find(input2dto1d(0, i)));
         }
 
         for(int i = 0; i < length; i++){
             uf.union(tail, input2dto1d(length-1, i));
-            System.out.println(uf.find(input2dto1d(length-1, i)));
         }
     }
 
@@ -123,6 +121,6 @@ public class Percolation {
 
     public static void main(String[] args) {
     // unit testing (required)
-        Percolation per = new Percolation(10);
+        //Percolation per = new Percolation(10);
     }; 
 }
