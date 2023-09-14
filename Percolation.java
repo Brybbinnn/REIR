@@ -94,7 +94,6 @@ public class Percolation {
         if(grid[row][col] == open){
             return true;
         }
-
         return false;
     };
 
@@ -103,7 +102,7 @@ public class Percolation {
         if(Percolation.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column is out of bounds");
         }
-        if(grid[row][col] == closed){
+        if((grid[row][col] == connected(head, input2dto1d(row, col))) && isOpen(row, col) == true){
             return true;
         }
         return false;
