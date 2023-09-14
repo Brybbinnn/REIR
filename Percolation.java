@@ -11,7 +11,7 @@ public class Percolation {
 
     public static int head = 0;
     public static int tail = 0;
-
+    public static WeightedQuickUnionUF uf;
 
     public Percolation(int N) {
     // create N-by-N grid, with all sites initially blocked
@@ -22,7 +22,7 @@ public class Percolation {
         grid = new boolean[length][length];
         head = N*N;
         tail = N*N+1;
-        WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N*N+2);
+        uf = new WeightedQuickUnionUF(N*N+2);
     };
 
     public int input2dto1d(int row, int col){
@@ -82,7 +82,7 @@ public class Percolation {
     };
 
     public boolean connected(int p, int q) {
-        return find(p) == find(q);
+        return uf.find(p) == uf.find(q);
     }
 
     public static void main(String[] args) {
