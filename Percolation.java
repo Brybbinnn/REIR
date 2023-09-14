@@ -23,9 +23,10 @@ public class Percolation {
         head = N*N;
         tail = N*N+1;
         uf = new WeightedQuickUnionUF(N*N+2);
+        Percolation.setParents();
     };
 
-    public void setParents(int parent){
+    public static void setParents(){
         for(int i = 0; i < length; i++){
             uf.union(head, i);
         }
