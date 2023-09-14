@@ -5,10 +5,9 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     public static boolean grid[][];
     public static int open_counter = 0;
-    public static int length = 0;
-
-    public static int head = 0;
-    public static int tail = 0;
+    public static int length;
+    public static int head ;
+    public static int tail;
     public static WeightedQuickUnionUF uf;
 
     public Percolation(int N) {
