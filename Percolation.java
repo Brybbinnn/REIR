@@ -1,5 +1,4 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import java.lang.IndexOutOfBoundsException;
 
 public class Percolation {
     public static int grid[][];
@@ -25,6 +24,9 @@ public class Percolation {
     }; 
     public void open(int row, int col) {
     // open the site (row, col) if it is not open already
+        if(Percolation.isOutOfBounds(row, col) == true){
+            throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
+        }
         if(grid[row][col] == closed){
             grid[row][col] = open;
             open_counter ++;
@@ -32,6 +34,9 @@ public class Percolation {
     }; 
     public boolean isOpen(int row, int col) {
     // is the site (row, col) open?
+        if(Percolation.isOutOfBounds(row, col) == true){
+            throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
+        }
         if(grid[row][col] == open){
             return true;
         }
@@ -40,7 +45,7 @@ public class Percolation {
     public boolean isFull(int row, int col) {
     // is the site (row, col) full?
         if(Percolation.isOutOfBounds(row, col) == true){
-            throw java.lang.IndexOutOfBoundsException;
+            throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
         }
         if(grid[row][col] == closed){
             return true;
