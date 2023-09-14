@@ -15,7 +15,8 @@ public class Percolation {
         }
         length = N;
         grid = new boolean[length][length];
-    }; 
+    };
+    
     public void open(int row, int col) {
     // open the site (row, col) if it is not open already
         if(Percolation.isOutOfBounds(row, col) == true){
@@ -25,7 +26,8 @@ public class Percolation {
             grid[row][col] = open;
             open_counter ++;
         }
-    }; 
+    };
+
     public boolean isOpen(int row, int col) {
     // is the site (row, col) open?
         if(Percolation.isOutOfBounds(row, col) == true){
@@ -35,7 +37,8 @@ public class Percolation {
             return true;
         }
         return false;
-    }; 
+    };
+
     public boolean isFull(int row, int col) {
     // is the site (row, col) full?
         if(Percolation.isOutOfBounds(row, col) == true){
@@ -46,25 +49,30 @@ public class Percolation {
         }
         return false;
     }; 
+
     public static boolean isOutOfBounds(int row, int col){
         if(row >= length || col >= length){
             return true;
         }
         return false;
     }
+
     public int numberOfOpenSites() {
     // number of open sites
         return open_counter;
-    }; 
+    };
+
     public boolean percolates() {
     // does the system percolate?
         
         return true;
-    }; 
+    };
+
     public boolean connected() {
         
         return true;
     }
+
     public static void main(String[] args) {
     // unit testing (required)
         //Percolation per = new Percolation(10);
