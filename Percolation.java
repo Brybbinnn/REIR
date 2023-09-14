@@ -6,7 +6,7 @@ public class Percolation {
     public static boolean grid[][];
     public static int open_counter = 0;
     public static int length;
-    public static int head ;
+    public static int head;
     public static int tail;
     public static WeightedQuickUnionUF uf;
 
