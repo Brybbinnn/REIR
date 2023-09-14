@@ -25,6 +25,15 @@ public class Percolation {
         uf = new WeightedQuickUnionUF(N*N+2);
     };
 
+    public void setParents(int parent){
+        for(int i = 0; i < length; i++){
+            uf.union(head, i);
+        }
+        for(int j = length^2-1; j > (length^2 - length -1); length --){
+            uf.union(tail, j);
+        }
+    }
+
     public int input2dto1d(int row, int col){
         return row + col * length;
     }
@@ -75,7 +84,7 @@ public class Percolation {
         return open_counter;
     };
 
-    public boolean percolates(int head, int tail) {
+    public boolean percolates() {
     // does the system percolate?
         return connected(head, tail);
     };
