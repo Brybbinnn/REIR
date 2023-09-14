@@ -22,6 +22,7 @@ public class Percolation {
         grid = new boolean[length][length];
         head = N*N;
         tail = N*N+1;
+        System.out.println(tail);
         uf = new WeightedQuickUnionUF(N*N+2);
         Percolation.setParents();
     };
@@ -30,7 +31,8 @@ public class Percolation {
         for(int i = 0; i < length; i++){
             uf.union(head, i);
         }
-        for(int j = length^2-1; j > (length^2 - length -1); length --){
+        
+        for(int j = length*length-length; j < (length^2); j++){
             uf.union(tail, j);
         }
     }
