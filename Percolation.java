@@ -30,10 +30,12 @@ public class Percolation {
     public static void setParents(){
         for(int i = 0; i < length; i++){
             uf.union(head, i);
+            System.out.println(uf.find(i));
         }
         
         for(int j = length*length-length; j < (length^2); j++){
             uf.union(tail, j);
+            System.out.println(uf.find(j));
         }
     }
 
@@ -89,13 +91,9 @@ public class Percolation {
 
     public boolean percolates() {
     // does the system percolate?
-        return connected(head, tail);
+        return uf.find(head) == uf.find(tail);
     };
-
-    public boolean connected(int p, int q) {
-        return uf.find(p) == uf.find(q);
-    }
-
+    
     public static void main(String[] args) {
     // unit testing (required)
         Percolation per = new Percolation(10);
