@@ -12,7 +12,7 @@ public class Percolation {
     //WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(N);
     //wqu.union(N, N);
         if(N <= 0){
-            throw new java.lang.IllegalArgumentException("");
+            throw new java.lang.IllegalArgumentException("Percolation does not accept variables below or equal to 0");
         }
         length = N;
         grid = new int[length][length];
