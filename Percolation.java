@@ -4,8 +4,6 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     public static boolean grid[][];
-    public static boolean open = true;
-    public static boolean closed = false;
     public static int open_counter = 0;
     public static int length = 0;
 
@@ -27,13 +25,6 @@ public class Percolation {
     };
 
     public static void setParents(){
-        /*for(int i = 0; i < length; i++){
-            uf.union(head, i);
-        }
-        
-        for(int j = length*length-length; j < (length*length); j++){
-            uf.union(tail, j);
-        }*/
         for(int i = 0; i < length; i++){
             uf.union(head, input2dto1d(0, i));
             System.out.println(uf.find(input2dto1d(0, i)));
@@ -44,6 +35,7 @@ public class Percolation {
             System.out.println(uf.find(input2dto1d(length-1, i)));
         }
     }
+
     public static int input2dto1d(int row, int col){
         return row + col * length;
     }
@@ -53,8 +45,8 @@ public class Percolation {
         if(Percolation.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column is out of bounds");
         }
-        if(grid[row][col] == closed){
-            grid[row][col] = open;
+        if(grid[row][col] == false){
+            grid[row][col] = true;
             open_counter ++;
         }
         union_cords(row-1, col, row, col);
@@ -79,7 +71,7 @@ public class Percolation {
         if(Percolation.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column is out of bounds");
         }
-        if(grid[row][col] == open){
+        if(grid[row][col] == true){
             return true;
         }
 
@@ -91,7 +83,7 @@ public class Percolation {
         if(Percolation.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column is out of bounds");
         }
-        if(grid[row][col] == open){
+        if(grid[row][col] == true){
             return true;
         }
         return false;
