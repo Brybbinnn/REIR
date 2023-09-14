@@ -9,7 +9,7 @@
  *
  *  Have you taken (part of) this course before: No.
  *
- *  Hours to complete assignment (optional): :*
+ *  Hours to complete assignment (optional): 6 hours
  *
  ******************************************************************************/
 
