@@ -1,14 +1,14 @@
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-public class Percolation {
+public class PercolationFailed {
     public static int grid[][];
     public static int open = 1;
     public static int closed = 0;
     public static int open_counter = 0;
     public static int length = 0;
 
-    public Percolation(int N) {
+    public PercolationFailed(int N) {
     // create N-by-N grid, with all sites initially blocked
         if(N <= 0){
             throw new java.lang.IllegalArgumentException("Percolation does not accept variables below or equal to 0");
@@ -26,7 +26,7 @@ public class Percolation {
     }; 
     public void open(int row, int col) {
     // open the site (row, col) if it is not open already
-        if(Percolation.isOutOfBounds(row, col) == true){
+        if(PercolationFailed.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
         }
         if(grid[row][col] == closed){
@@ -36,7 +36,7 @@ public class Percolation {
     }; 
     public boolean isOpen(int row, int col) {
     // is the site (row, col) open?
-        if(Percolation.isOutOfBounds(row, col) == true){
+        if(PercolationFailed.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
         }
         if(grid[row][col] == open){
@@ -46,7 +46,7 @@ public class Percolation {
     }; 
     public boolean isFull(int row, int col) {
     // is the site (row, col) full?
-        if(Percolation.isOutOfBounds(row, col) == true){
+        if(PercolationFailed.isOutOfBounds(row, col) == true){
             throw new java.lang.IndexOutOfBoundsException("The row or column was out of bounds");
         }
         if(grid[row][col] == closed){
