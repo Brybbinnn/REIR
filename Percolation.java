@@ -1,6 +1,8 @@
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 public class Percolation {
    public Percolation(int N){
-    return;
+    //WeightedQuickUnionUF wqf = new WeightedQuickUnionUF(N);
    }
 
    public void open(int row, int col){
@@ -16,7 +18,7 @@ public class Percolation {
    }
 
    public int numberOfOpenSites(){
-    return 1;
+    return 0;
    }
 
    public boolean percolates(){

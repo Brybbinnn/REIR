@@ -75,7 +75,7 @@ public class PercolationFailed {
     }
     public static void main(String[] args) {
     // unit testing (required)
-        Percolation per = new Percolation(10);
+        //Percolation per = new Percolation(10);
         //WeightedQuickUnionUF wqf = new WeightedQuickUnionUF(length);
         //int con = wqf.count();
         //System.out.println(con);
