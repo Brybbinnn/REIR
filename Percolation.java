@@ -75,10 +75,9 @@ public class Percolation {
         return open_counter;
     };
 
-    public boolean percolates() {
+    public boolean percolates(int head, int tail) {
     // does the system percolate?
-        
-        return true;
+        return connected(head, tail);
     };
 
     public boolean connected(int p, int q) {
