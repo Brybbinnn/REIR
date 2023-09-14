@@ -22,21 +22,28 @@ public class Percolation {
         grid = new boolean[length][length];
         head = N*N;
         tail = N*N+1;
-        System.out.println(tail);
         uf = new WeightedQuickUnionUF(N*N+2);
         Percolation.setParents();
     };
 
     public static void setParents(){
-        for(int i = 0; i < length; i++){
+        /*for(int i = 0; i < length; i++){
             uf.union(head, i);
         }
         
         for(int j = length*length-length; j < (length*length); j++){
             uf.union(tail, j);
+        }*/
+        for(int i = 0; i < length; i++){
+            uf.union(head, input2dto1d(0, i));
+            System.out.println(uf.find(input2dto1d(0, i)));
+        }
+
+        for(int i = 0; i < length; i++){
+            uf.union(tail, input2dto1d(length-1, i));
+            System.out.println(uf.find(input2dto1d(length-1, i)));
         }
     }
-
     public static int input2dto1d(int row, int col){
         return row + col * length;
     }
