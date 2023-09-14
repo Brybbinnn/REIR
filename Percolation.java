@@ -67,9 +67,13 @@ public class Percolation {
     }; 
     public boolean percolates() {
     // does the system percolate?
-
+        
         return true;
     }; 
+    public boolean connected() {
+        
+        return true;
+    }
     public static void main(String[] args) {
     // unit testing (required)
         new Percolation(10);
