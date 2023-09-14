@@ -1,15 +1,15 @@
 /******************************************************************************
- *  Canvas Group: 
- *  Name & Kt:  
- *  Name & Kt:  
+ *  Canvas Group: 69
+ *  Name & Kt:  Bryndís Gunnarsdóttir, 031102-2350
+ *  Name & Kt:  Grímur Arnar Ámundason, 130103-2430
  *
- *  Operating system:
- *  Compiler:
- *  Text editor / IDE:
+ *  Operating system: macOS, Windows OS
+ *  Compiler: VisualStudioCode
+ *  Text editor / IDE: VisualStudioCode
  *
- *  Have you taken (part of) this course before:
+ *  Have you taken (part of) this course before: No.
  *
- *  Hours to complete assignment (optional):
+ *  Hours to complete assignment (optional): :*
  *
  ******************************************************************************/
 
