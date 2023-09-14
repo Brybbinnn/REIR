@@ -37,7 +37,7 @@ public class Percolation {
         }
     }
 
-    public int input2dto1d(int row, int col){
+    public static int input2dto1d(int row, int col){
         return row + col * length;
     }
 
@@ -50,6 +50,33 @@ public class Percolation {
             grid[row][col] = open;
             open_counter ++;
         }
+        union_cords(row-1, col, row, col);
+        union_cords(row, col+1, row, col);
+        union_cords(row+1, col, row, col);
+        union_cords(row, col-1, row, col);
+
+    };
+
+    public static void union_cords(int new_row, int new_col, int old_row, int old_col){
+        try{
+            if(isOpenStatic(new_row, new_col) == true){
+                uf.union(input2dto1d(old_row, old_col), input2dto1d(new_row, new_col));
+            }
+        }
+        catch(IndexOutOfBoundsException e){   
+        }
+    }
+
+    public static boolean isOpenStatic(int row, int col) {
+    // is the site (row, col) open?
+        if(Percolation.isOutOfBounds(row, col) == true){
+            throw new java.lang.IndexOutOfBoundsException("The row or column is out of bounds");
+        }
+        if(grid[row][col] == open){
+            return true;
+        }
+
+        return false;
     };
 
     public boolean isOpen(int row, int col) {
@@ -77,6 +104,9 @@ public class Percolation {
 
     public static boolean isOutOfBounds(int row, int col){
         if(row >= length || col >= length){
+            return true;
+        }
+        else if(row < 0 || col < 0){
             return true;
         }
         return false;
