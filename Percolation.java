@@ -1,19 +1,23 @@
-//import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+import java.lang.IndexOutOfBoundsException;
 
 public class Percolation {
     public static int grid[][];
     public static int open = 1;
     public static int closed = 0;
+    public static int open_counter = 0;
+    public static int length = 0;
 
     public Percolation(int N) {
     // create N-by-N grid, with all sites initially blocked
     //WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(N);
     //wqu.union(N, N);
-        grid = new int[N][N];
+        length = N;
+        grid = new int[length][length];
 
-        for(int i = 0; i < N; i++){
+        for(int i = 0; i < length; i++){
             String gridOut = "";
-            for(int j = 0; j < N; j++){
+            for(int j = 0; j < length; j++){
                 gridOut = gridOut.concat(Integer.toString(grid[i][j]) + " ");
             }
             System.out.println(gridOut); 
@@ -21,25 +25,37 @@ public class Percolation {
     }; 
     public void open(int row, int col) {
     // open the site (row, col) if it is not open already
-        if(grid[row][col] == 0){
-
+        if(grid[row][col] == closed){
+            grid[row][col] = open;
+            open_counter ++;
         }
-
     }; 
     public boolean isOpen(int row, int col) {
     // is the site (row, col) open?
-
-        return true;
+        if(grid[row][col] == open){
+            return true;
+        }
+        return false;
     }; 
     public boolean isFull(int row, int col) {
     // is the site (row, col) full?
-
-        return true;
+        if(Percolation.isOutOfBounds(row, col) == true){
+            throw java.lang.IndexOutOfBoundsException;
+        }
+        if(grid[row][col] == closed){
+            return true;
+        }
+        return false;
     }; 
+    public static boolean isOutOfBounds(int row, int col){
+        if(row >= length || col >= length){
+            return true;
+        }
+        return false;
+    }
     public int numberOfOpenSites() {
     // number of open sites
-
-        return 1;
+        return open_counter;
     }; 
     public boolean percolates() {
     // does the system percolate?
@@ -51,4 +67,3 @@ public class Percolation {
         new Percolation(10);
     }; 
 }
-
