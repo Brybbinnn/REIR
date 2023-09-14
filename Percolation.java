@@ -20,6 +20,8 @@ public class Percolation {
         }
         length = N;
         grid = new boolean[length][length];
+        head = N*N;
+        tail = N*N+1;
         WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N*N+2);
     };
 
