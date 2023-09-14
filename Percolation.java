@@ -11,6 +11,9 @@ public class Percolation {
     // create N-by-N grid, with all sites initially blocked
     //WeightedQuickUnionUF wqu = new WeightedQuickUnionUF(N);
     //wqu.union(N, N);
+        if(N <= 0){
+            throw new java.lang.IllegalArgumentException("");
+        }
         length = N;
         grid = new int[length][length];
 
