@@ -8,6 +8,7 @@ public class Percolation {
     public static boolean closed = false;
     public static int open_counter = 0;
     public static int length = 0;
+
     public static int head = 0;
     public static int tail = 0;
 
@@ -19,10 +20,13 @@ public class Percolation {
         }
         length = N;
         grid = new boolean[length][length];
-        head = N*N;
-        tail = N*N+1;
+        WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N*N+2);
     };
-    
+
+    public int input2dto1d(int row, int col){
+        return row + col * length;
+    }
+
     public void open(int row, int col) {
     // open the site (row, col) if it is not open already
         if(Percolation.isOutOfBounds(row, col) == true){
@@ -42,6 +46,7 @@ public class Percolation {
         if(grid[row][col] == open){
             return true;
         }
+
         return false;
     };
 
@@ -80,10 +85,6 @@ public class Percolation {
 
     public static void main(String[] args) {
     // unit testing (required)
-        //Percolation per = new Percolation(10);
-        //WeightedQuickUnionUF wqf = new WeightedQuickUnionUF(length);
-        //int con = wqf.count();
-        //System.out.println(con);
-        
+        Percolation per = new Percolation(10);
     }; 
 }
