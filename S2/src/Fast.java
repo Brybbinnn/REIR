@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.Queue;
 
 public class Fast {
     private Point[] points;
-    private Queue<Queue<Double>> queue = new Queue<>();
+    private Queue<Queue<Point>> queue = new Queue<>();
 
     public Fast(Point[] points) {
         this.points = points;
@@ -15,7 +15,7 @@ public class Fast {
 
     public void find_segments() {
         for (Point p : this.points) {
-            Queue<Double> segment = new Queue<>();
+            Queue<Point> segment = new Queue<>();
             for (Point q : this.points) {
                 if (p != q) {
                     // Need to sort segments somehow
@@ -27,8 +27,8 @@ public class Fast {
         }
     }
 
-    public Queue<Queue<Double>> segments() {
-        return this.queue;
+    public Queue<Queue<Point>> segments() {
+        // return this.queue;
     }
 
     public static void main(String[] args) {
@@ -44,9 +44,9 @@ public class Fast {
         }
         Fast fast = new Fast(points);
         out.printf("Brute method...\n");
-        for (Queue<Double> q : fast.queue) {
+        for (Queue<Point> q : fast.queue) {
             out.printf("\n");
-            for (Double p : q) {
+            for (Point p : q) {
                 out.printf(p.toString() + ", ");
             }
         }
