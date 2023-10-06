@@ -14,16 +14,10 @@ public class Fast {
     }
 
     public void find_segments() {
-        for (Point p : this.points) {
-            Queue<Point> segment = new Queue<>();
-            for (Point q : this.points) {
-                if (p != q) {
-                    // Need to sort segments somehow
-                    segment.enqueue(p.slopeTo(q));
-                }
-                // Arrays.sort(segment)
-            }
-            queue.enqueue(segment);
+        for (int i = 0; i < points.length; i++) {
+            double slopeToCheck = points[i].slopeTo(points[i + 1]);
+            // Vinna með þetta frekar, getur alveg breytt línunni að ofan,
+            // en bara allavega for loopa í gegnum points.length
         }
     }
 
