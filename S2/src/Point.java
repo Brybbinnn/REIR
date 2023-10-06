@@ -12,14 +12,13 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
 
-
 public class Point implements Comparable<Point> {
 
     public final int x, y;
 
     // compare points by slope
     public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
-        public int compare(Point p1, Point p2){
+        public int compare(Point p1, Point p2) {
             double slope_p1 = slopeTo(p1);
             double slope_p2 = slopeTo(p2);
 
@@ -49,7 +48,7 @@ public class Point implements Comparable<Point> {
     public double slopeTo(Point that) {
         double y = that.y - this.y;
         double x = that.x - this.x;
-        return y/x;
+        return y / x;
     }
 
     /**
@@ -57,20 +56,17 @@ public class Point implements Comparable<Point> {
      * y-coordinates and breaking ties by x-coordinates
      */
     public int compareTo(Point that) {
-        if(this.y < that.y){
+        if (this.y < that.y) {
             return -1;
-        }
-        else if(this.y > that.y){
+        } else if (this.y > that.y) {
             return 1;
-        }
-        else{
-            if(this.x < that.x){
+        } else {
+            if (this.x < that.x) {
                 return -1;
-            }
-            else if(this.x > that.x){
+            } else if (this.x > that.x) {
                 return 1;
-            }
-            else return 0;
+            } else
+                return 0;
         }
     }
 
@@ -107,4 +103,3 @@ public class Point implements Comparable<Point> {
         }
     }
 }
-

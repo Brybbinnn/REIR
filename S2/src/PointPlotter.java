@@ -1,3 +1,4 @@
+
 /*************************************************************************
  *  Compilation:  javac PointPlotter.java
  *  Execution:    java PointPlotter input.txt
@@ -19,7 +20,7 @@ public class PointPlotter {
         // rescale coordinates and turn on animation mode
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-        //StdDraw.show(0);
+        // StdDraw.show(0);
 
         // read in the input
         String filename = args[0];
@@ -33,6 +34,6 @@ public class PointPlotter {
         }
 
         // display to screen all at once
-        //StdDraw.show(0);
+        // StdDraw.show(0);
     }
 }
