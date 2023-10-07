@@ -51,7 +51,7 @@ public class Fast {
         return this.lineQueue;
     }
 
-    public int numberOfLines() {
+    public int numberOfSegments() {
         return lineQueue.size();
     }
 
