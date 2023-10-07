@@ -25,7 +25,7 @@ public class Brute {
         return false;
     }
 
-    public Queue<Queue<Point>> segment() {
+    public Queue<Queue<Point>> segments() {
         return queue;
     }
 
