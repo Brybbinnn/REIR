@@ -14,8 +14,8 @@ public class Fast {
     }
 
     public void find_segments() {
-        for (int i = 0; i < points.length; i++) {
-            Point initialPoint = points[0];
+        Point initialPoint = points[0];
+        for (int i = 0; i < points.length - 1; i++) {
             double slopeToCheck = initialPoint.slopeTo(points[i + 1]);
             // Vinna með þetta frekar, getur alveg breytt línunni að ofan,
             // en bara allavega for loopa í gegnum points.length
