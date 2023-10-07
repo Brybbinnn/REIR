@@ -15,11 +15,17 @@ public class Fast {
 
     public void find_segments() {
         Point initialPoint = points[0];
-        for (int i = 0; i < points.length - 1; i++) {
-            double slopeToCheck = initialPoint.slopeTo(points[i + 1]);
-            // Vinna með þetta frekar, getur alveg breytt línunni að ofan,
-            // en bara allavega for loopa í gegnum points.length
+        double prevSlope = initialPoint.slopeTo(points[1]);
+        int matchingSlopes = 0;
 
+        for (int i = 1; i < points.length - 1; i++) {
+            double slopeToCheck = initialPoint.slopeTo(points[i + 1]);
+            if(slopeToCheck == prevSlope){
+                matchingSlopes ++;
+                else if(matchingSlopes >= 3){
+
+                }
+            }
         }
     }
 
