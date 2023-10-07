@@ -15,14 +15,16 @@ public class Fast {
 
     public void find_segments() {
         for (int i = 0; i < points.length; i++) {
-            double slopeToCheck = points[i].slopeTo(points[i + 1]);
+            Point initialPoint = points[0];
+            double slopeToCheck = initialPoint.slopeTo(points[i + 1]);
             // Vinna með þetta frekar, getur alveg breytt línunni að ofan,
             // en bara allavega for loopa í gegnum points.length
+
         }
     }
 
     public Queue<Queue<Point>> segments() {
-        // return this.queue;
+        return this.queue;
     }
 
     public static void main(String[] args) {
