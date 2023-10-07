@@ -11,34 +11,48 @@ public class Fast {
     public Fast(Point[] points) {
         this.points = points;
         Arrays.sort(this.points);
-        find_segments();
+        this.find_segments();
     }
 
     public void find_segments() {
-        Point initialPoint = points[0];
-        Queue<Point> line = new Queue<>();
-        double prevSlope = initialPoint.slopeTo(points[1]);
-        int matchingSlopes = 0;
+        int n = points.length;
 
-        for (int i = 1; i < points.length - 1; i++) {
-            double slopeToCheck = initialPoint.slopeTo(points[i + 1]);
-            if (slopeToCheck == prevSlope) {
-                matchingSlopes++;
-            } else {
-                if (matchingSlopes == 3) {
-                    lineQueue.enqueue(line);
+        for (int i = 0; i < n; i++) {
+            Arrays.sort(this.points, i, n);
+            Point p = points[i];
+
+            // Sort points by SLOPE_ORDER with p
+            Arrays.sort(this.points, i, n, p.SLOPE_ORDER);
+
+            for (int j = i; j < n - 2; j++) {
+                if (isLine(p, points[j], points[j + 1], points[j + 2])) {
+                    Arrays.sort(this.points, j, j + 3);
+
+                    Queue<Point> segmentInnerQueue = new Queue<>();
+                    segmentInnerQueue.enqueue(p);
+                    for (int k = 0; k < 3; k++) {
+                        segmentInnerQueue.enqueue(this.points[(j + k)]);
+                    }
+                    lineQueue.enqueue(segmentInnerQueue);
                 }
-                matchingSlopes = 1;
-                line.dequeue();
-                initialPoint = line.dequeue();
-                line = new Queue<>();
             }
-            prevSlope = slopeToCheck;
         }
+    }
+
+    public boolean isLine(Point p, Point q, Point r, Point s) {
+        // Checks if the given slopes form a line
+        if (p.slopeTo(q) == p.slopeTo(r) && p.slopeTo(q) == p.slopeTo(s)) {
+            return true;
+        }
+        return false;
     }
 
     public Queue<Queue<Point>> segments() {
         return this.lineQueue;
+    }
+
+    public int numberOfLines() {
+        return lineQueue.size();
     }
 
     public static void main(String[] args) {
@@ -53,7 +67,7 @@ public class Fast {
 
         }
         Fast fast = new Fast(points);
-        out.printf("Brute method...\n");
+        out.printf("Fast method\n");
         for (Queue<Point> q : fast.lineQueue) {
             out.printf("\n");
             for (Point p : q) {
