@@ -6,7 +6,7 @@ Name: Grímur Arnar Ámundason
 Login:            
 
 Partner name: Bryndís Gunnarsdóttir
-Partner login:    
+Partner login: bryndisg21@ru.is?
 
 Hours to complete assignment (optional): 20 hours
 
@@ -62,9 +62,15 @@ The formula for the slope is (y2 - y1) / (x2 - x1).
   12800
 
 
-Brute:    ~
+Brute:    ~  O(N4)
 
-Sorting:  ~
+in brute if we look at the code we have nested for loops with 4 for loops,
+we also have 1 single for loop and one nested for loop with 2 for loops.
+this makes it O(N4) + O(N) + O(N2).
+O(N4) is the fastest growing and therefore the only one that matters to us in tilda notation.
+
+Sorting:  ~  O(N2log(N))
+
 
 
 
@@ -102,7 +108,7 @@ slopeTo() does not check if we are dividing by zero and other special cases.
  *  Describe any serious problems you encountered.                    
  **********************************************************************/
 
-
+overwhelming sadness as the world is slowly burning, capitalism always wins.
 
 
 /**********************************************************************
