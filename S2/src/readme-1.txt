@@ -108,7 +108,8 @@ slopeTo() does not check if we are dividing by zero and other special cases.
  *  Describe any serious problems you encountered.                    
  **********************************************************************/
 
-overwhelming sadness as the world is slowly burning, capitalism always wins.
+Not understanding Java and how to use SLOPE_ORDER for the longest time, as well
+as not understanding which iterators to use. Which was not helped by a dated coding language
 
 
 /**********************************************************************
