@@ -28,12 +28,12 @@ public class Fast {
                 if (isLine(p, points[j], points[j + 1], points[j + 2])) {
                     Arrays.sort(this.points, j, j + 3);
 
-                    Queue<Point> segmentInnerQueue = new Queue<>();
-                    segmentInnerQueue.enqueue(p);
+                    Queue<Point> innerSegments = new Queue<>();
+                    innerSegments.enqueue(p);
                     for (int k = 0; k < 3; k++) {
-                        segmentInnerQueue.enqueue(this.points[(j + k)]);
+                        innerSegments.enqueue(this.points[(j + k)]);
                     }
-                    lineQueue.enqueue(segmentInnerQueue);
+                    lineQueue.enqueue(innerSegments);
                 }
             }
         }
