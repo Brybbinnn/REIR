@@ -52,20 +52,13 @@ public class KdTree {
         if (p == null) {
             throw new IllegalArgumentException("Point to be inserted cannot be null.");
         }
-        if(root == null){
-            root = new Node(p.y(), p, 1, 0);
-        }
-        else{
 
-        }
-    }
-/*
-        root = insert_node(root, p, true); // Start with level 0 (comparing x-coordinates)
+        root = insert(root, p, true); // Start with level 0 (comparing x-coordinates)
     }
     
-    private void insert_node(Node node, Point2D point, boolean compareX) {
+    private Node insert(Node node, Point2D point, boolean compareX) {
         if (node == null) {
-            Node new_node = new Node(point, 1, 0);
+            Node new_node = new Node(point.x(), point, 1, 0);
         }
     
         if (point.equals(node.key)) {
@@ -87,8 +80,7 @@ public class KdTree {
     
         node.size = 1 + size(node.left) + size(node.right);
         return node;
-    }    
-*/
+    }
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
