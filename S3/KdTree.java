@@ -10,21 +10,21 @@ import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
 
-
-
 public class KdTree {
     // construct an empty set of points
     
     private Node root;             // root of BST
 
     private class Node {
-        private Key key;           // sorted by key
+        private Double key;           // sorted by key
+        private Point2D val;
         private Node left, right;  // left and right subtrees
         private int size;          // number of nodes in subtree
         private int level;
     
-        public Node(Key key, int size, int level) {
+        public Node(Double key, Point2D val, int size, int level) {
             this.key = key;
+            this.val = val;
             this.size = size;
             this.level = level;
         }
@@ -52,10 +52,18 @@ public class KdTree {
         if (p == null) {
             throw new IllegalArgumentException("Point to be inserted cannot be null.");
         }
-        root = insert(root, p, true); // Start with level 0 (comparing x-coordinates)
+        if(root == null){
+            root = new Node(p.y(), p, 1, 0);
+        }
+        else{
+
+        }
+    }
+/*
+        root = insert_node(root, p, true); // Start with level 0 (comparing x-coordinates)
     }
     
-    private Node insert(Node node, Point2D point, boolean compareX) {
+    private void insert_node(Node node, Point2D point, boolean compareX) {
         if (node == null) {
             Node new_node = new Node(point, 1, 0);
         }
@@ -80,6 +88,7 @@ public class KdTree {
         node.size = 1 + size(node.left) + size(node.right);
         return node;
     }    
+*/
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
