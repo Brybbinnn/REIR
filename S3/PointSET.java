@@ -54,11 +54,13 @@ public class PointSET {
 
     // all points in the set that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
+        SET<Point2D> rect_Set = new SET<>();
         for (Point2D point2d : set) {
             if(rect.contains(point2d)){
-
+                rect_Set.add(point2d);
             }
         }
+        return rect_Set;
     }
 
     // a nearest neighbor in the set to p; null if set is empty
