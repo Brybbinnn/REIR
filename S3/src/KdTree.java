@@ -14,16 +14,16 @@ public class KdTree {
     private Node root;             // root of BST
 
     private class Node {
-        private Double key;           // sorted by key
-        private Point2D val;
+        private Point2D key;           // sorted by key
         private Node left, right;  // left and right subtrees
         private int size;          // number of nodes in subtree
+        private RectHV rect;
         private int level;
     
-        public Node(Double key, Point2D val, int size, int level) {
+        public Node(Point2D key, int size, int level, RectHV rect) {
             this.key = key;
-            this.val = val;
             this.size = size;
+            this.rect = rect;
             this.level = level;
         }
     }
@@ -46,11 +46,6 @@ public class KdTree {
         else return node.size;
     }
 
-    // add the point p to the set (if it is not already in the set)
-    // public void insert(Point2D p) {
-
-    // };
-
     public void insert(Point2D p) {
         if (p == null) {
             throw new IllegalArgumentException("Point to be inserted cannot be null.");
@@ -59,24 +54,26 @@ public class KdTree {
         root = insert(root, p, true); // Start with level 0 (comparing x-coordinates)
     }
     
-    private Node insert(Node node, Point2D point, boolean compareX) {
+    private Node insert(Node node, Point2D point, boolean compareX, RectHV rect) {
         if (node == null) {
-            return new Node(point.x(), point, 1, 0);
+            return new Node(point, 1, 0, new RectHV(0, 0, 1, 1));
         }
     
-        if (point.equals(node.val)) {
+        if (point.equals(node.key)) {
             return node; // Avoid inserting duplicates
         }
     
         int cmp;
         if (compareX) {
-            cmp = Double.compare(point.x(), node.key);
+            cmp = Double.compare(point.x(), node.key.x());
         } else {
-            cmp = Double.compare(point.y(), node.key);
+            cmp = Double.compare(point.y(), node.key.y());
         }
     
+        RectHV leftRect = null, rightRect = null;
         if (cmp < 0) {
-            node.left = insert(node.left, point, !compareX);
+            leftRect = new RectHV(rect.xmin(), cmp, cmp, cmp);
+            node.left = insert(node.left, point, !compareX, leftRect);
         } else {
             node.right = insert(node.right, point, !compareX);
         }
@@ -101,7 +98,7 @@ public class KdTree {
         
         if (node == null) return null;         //When to stop searching
 
-        int cmp = point.compareTo(node.val);   //Check if the current node matches the point we are looking for
+        int cmp = point.compareTo(node.key);   //Check if the current node matches the point we are looking for
         
         if (cmp < 0) {
             return get(node.left, point, !compareX);
@@ -110,7 +107,7 @@ public class KdTree {
             return get(node.right, point, !compareX);
         }
         else {
-            return node.val;
+            return node.key;
         }
     }
 
@@ -123,24 +120,54 @@ public class KdTree {
         return null;
     }
 
+    private Node range(Node node, RectHV rect){
+        if(node == null) return null;
+        //if(rect.contains(node.key) == false) return null;
+        RectHV rec = new RectHV(0, 0, 0, 0);
+        return node;
+    }
+
     // a nearest neighbor in the set to p; null if set is empty
-    public Point2D nearest(Point2D p) {
-        // check first point and get the distance
-        Point2D nearest = nearest_recursive(p, root);
+   public Point2D nearest(Point2D p) {
         if (isEmpty()) {
             return null;
         }
-        return nearest;
+        return nearest_recursive(root, p, root.key);
     }
 
-    private Point2D nearest_recursive(Point2D p, Node node) {
-        
-        
-        // if the first point is to the left of p check right first, then left
-        // if a point in the right tree is closer we dont need to check the left tree
-        // if the point is above p then check above first then below
-        return p;
+    private Point2D nearest_recursive(Node node, Point2D queryPoint, Point2D champion) {
+        if (node == null) {
+            return champion;
+        }
+
+        double championDistance = queryPoint.distanceSquaredTo(champion);
+        double currentRectDistance = node.rect.distanceSquaredTo(queryPoint);
+
+        if (currentRectDistance < championDistance) {
+            if (node.key.distanceSquaredTo(queryPoint) < championDistance) {
+                champion = node.key;
+            }
+
+            if (nodeIsLeftOfPoint(queryPoint, node)) {
+                champion = nearest_recursive(node.left, queryPoint, champion);
+                champion = nearest_recursive(node.right, queryPoint, champion);
+            } else {
+                champion = nearest_recursive(node.right, queryPoint, champion);
+                champion = nearest_recursive(node.left, queryPoint, champion);
+            }
+        }
+
+        return champion;
     }
+
+    private boolean nodeIsLeftOfPoint(Point2D point, Node node) {
+        if (node.level % 2 == 0) {
+            return point.x() < node.key.x();
+        } else {
+            return point.y() < node.key.y();
+        }
+    }
+
 
     /*******************************************************************************
      * Test client
