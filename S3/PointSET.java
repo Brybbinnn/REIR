@@ -65,7 +65,17 @@ public class PointSET {
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        return p;
+        Point2D nearest_point = null;
+
+        for (Point2D point2d : set) {
+            if (nearest_point == null) {
+                nearest_point = point2d;
+            }
+            if (p.distanceTo(point2d) < p.distanceTo(nearest_point)){
+                nearest_point = point2d;
+            }
+        }
+        return nearest_point;
     }
 
     public static void main(String[] args) {

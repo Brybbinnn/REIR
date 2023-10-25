@@ -2,30 +2,84 @@
 /*************************************************************************
  *************************************************************************/
 
+import java.security.Key;
 import java.util.Arrays;
 
 import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
 
+
+
 public class KdTree {
     // construct an empty set of points
+    
+    private Node root;             // root of BST
+
+    private class Node {
+        private Key key;           // sorted by key
+        private Node left, right;  // left and right subtrees
+        private int size;          // number of nodes in subtree
+        private int level;
+    
+        public Node(Key key, int size, int level) {
+            this.key = key;
+            this.size = size;
+            this.level = level;
+        }
+    }
+
     public KdTree() {
     }
 
     // is the set empty?
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
 
     // number of points in the set
     public int size() {
-        return 0;
+        return size();
     }
 
     // add the point p to the set (if it is not already in the set)
+    // public void insert(Point2D p) {
+
+    // };
+
     public void insert(Point2D p) {
-    };
+        if (p == null) {
+            throw new IllegalArgumentException("Point to be inserted cannot be null.");
+        }
+        root = insert(root, p, true); // Start with level 0 (comparing x-coordinates)
+    }
+    
+    private Node insert(Node node, Point2D point, boolean compareX) {
+        if (node == null) {
+            Node new_node = new Node(point, 1, 0);
+        }
+    
+        if (point.equals(node.key)) {
+            return node; // Avoid inserting duplicates
+        }
+    
+        int cmp;
+        if (compareX) {
+            cmp = Double.compare(point.x(), node.key.x());
+        } else {
+            cmp = Double.compare(point.y(), node.key.y());
+        }
+    
+        if (cmp < 0) {
+            node.left = insert(node.left, point, !compareX);
+        } else {
+            node.right = insert(node.right, point, !compareX);
+        }
+    
+        node.size = 1 + size(node.left) + size(node.right);
+        return node;
+    }    
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {

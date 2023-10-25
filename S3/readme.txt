@@ -3,16 +3,20 @@
  *  Kd-tree
 **********************************************************************/
 
-Name 1:    
-kt 1:   
+Name 1: Grimur Arnar √Åmundason   
+kt 1: 130103-2430
 
-Name 2:    
-kt 2:   
+Name 2: Brynd√≠s Gunnarsd√≥ttir
+kt 2: 0311022350
 
 /**********************************************************************
  *  Briefly describe the Node data type you used to implement the
  *  2d-tree data structure.
  **********************************************************************/
+
+If I understand the question correctly then the Note data would be same as used
+in a general implementation of a black red tree, each node containing a point of
+the Point2D datatype 
 
 /**********************************************************************
  *  Describe your method for range search in a kd-tree.
@@ -80,7 +84,7 @@ input1M.txt
 
 /**********************************************************************
  *  Describe whatever help (if any) that you received.
- *  Don't include readings, lectures, and dÊmatÌmar, but do
+ *  Don't include readings, lectures, and dÔøΩmatÔøΩmar, but do
  *  include any help from people (including course staff, 
  *  classmates, and friends) and attribute them by name.
  **********************************************************************/
