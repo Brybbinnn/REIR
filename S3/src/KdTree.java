@@ -88,12 +88,34 @@ public class KdTree {
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
+        if(get(p) != null) return true;
         return false;
+    }
+
+    public Point2D get(Point2D p) {
+        return get(root, p, true);
+    }
+
+    private Point2D get(Node node, Point2D point, boolean compareX) {
+        //if (point == 0) throw new IllegalArgumentException("calls get() with 0 as a key");
+        
+        if (node == null) return null;         //When to stop searching
+
+        int cmp = point.compareTo(node.val);   //Check if the current node matches the point we are looking for
+        
+        if (cmp < 0) {
+            return get(node.left, point, !compareX);
+        } 
+        else if (cmp > 0) {
+            return get(node.right, point, !compareX);
+        }
+        else {
+            return node.val;
+        }
     }
 
     // draw all of the points to standard draw
     public void draw() {
-
     }
 
     // all points in the set that are inside the rectangle
@@ -103,6 +125,20 @@ public class KdTree {
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
+        // check first point and get the distance
+        Point2D nearest = nearest_recursive(p, root);
+        if (isEmpty()) {
+            return null;
+        }
+        return nearest;
+    }
+
+    private Point2D nearest_recursive(Point2D p, Node node) {
+        
+        
+        // if the first point is to the left of p check right first, then left
+        // if a point in the right tree is closer we dont need to check the left tree
+        // if the point is above p then check above first then below
         return p;
     }
 
