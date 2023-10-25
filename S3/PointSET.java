@@ -1,4 +1,3 @@
-
 /****************************************************************************
  *  Compilation:  javac PointSET.java
  *  Execution:    
@@ -16,16 +15,19 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
+import edu.princeton.cs.algs4.SET;
+import edu.princeton.cs.algs4.RectHV;
 
 public class PointSET {
+    private SET<Point2D> set;
     // construct an empty set of points
     public PointSET() {
-
+        set = new SET<>();
     }
 
     // is the set empty?
     public boolean isEmpty() {
-        return false;
+        return set.size() == 0;
     }
 
     // number of points in the set
