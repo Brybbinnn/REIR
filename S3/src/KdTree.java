@@ -58,18 +58,18 @@ public class KdTree {
     
     private Node insert(Node node, Point2D point, boolean compareX) {
         if (node == null) {
-            Node new_node = new Node(point.x(), point, 1, 0);
+            return new Node(point.x(), point, 1, 0);
         }
     
-        if (point.equals(node.key)) {
+        if (point.equals(node.val)) {
             return node; // Avoid inserting duplicates
         }
     
         int cmp;
         if (compareX) {
-            cmp = Double.compare(point.x(), node.key.x());
+            cmp = Double.compare(point.x(), node.key);
         } else {
-            cmp = Double.compare(point.y(), node.key.y());
+            cmp = Double.compare(point.y(), node.key);
         }
     
         if (cmp < 0) {
@@ -78,7 +78,7 @@ public class KdTree {
             node.right = insert(node.right, point, !compareX);
         }
     
-        node.size = 1 + size(node.left) + size(node.right);
+        node.size = 1 + node.left.size + node.right.size;
         return node;
     }
 
