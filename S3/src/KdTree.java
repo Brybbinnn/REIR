@@ -38,7 +38,12 @@ public class KdTree {
 
     // number of points in the set
     public int size() {
-        return size();
+        return size(root);
+    }
+
+    private int size(Node node){
+        if(node == null) return 0;
+        else return node.size;
     }
 
     // add the point p to the set (if it is not already in the set)
@@ -76,7 +81,8 @@ public class KdTree {
             node.right = insert(node.right, point, !compareX);
         }
     
-        node.size = 1 + node.left.size + node.right.size;
+        node.size = 1 + size(node.left) + size(node.right);
+        node.level ++;
         return node;
     }
 
