@@ -72,13 +72,18 @@ public class KdTree {
     
         RectHV leftRect = null, rightRect = null;
         if (cmp < 0) {
-            leftRect = new RectHV(rect.xmin(), cmp, cmp, cmp);
+            if(compareX) leftRect = new RectHV(rect.xmin(), rect.ymin(), point.x(), rect.ymax());
+            else leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), point.y());
+
             node.left = insert(node.left, point, !compareX, leftRect);
+
         } else {
-            rightRect = new RectHV(cmp, cmp, cmp, cmp)
+            if(compareX) rightRect = new RectHV(point.x(), rect.ymin(), rect.xmax(), rect.ymax());
+            else rightRect = new RectHV(rect.xmin(), point.y(), rect.xmax(), rect.ymax());
+            
             node.right = insert(node.right, point, !compareX, rightRect);
         }
-    
+        
         node.size = 1 + size(node.left) + size(node.right);
         node.level ++;
         return node;
@@ -133,10 +138,10 @@ public class KdTree {
         if (isEmpty()) {
             return null;
         }
-        return nearest_recursive(root, p, root.key);
+        return nearest(root, p, root.key);
     }
 
-    private Point2D nearest_recursive(Node node, Point2D queryPoint, Point2D champion) {
+    private Point2D nearest(Node node, Point2D queryPoint, Point2D champion) {
         if (node == null) {
             return champion;
         }
@@ -150,11 +155,11 @@ public class KdTree {
             }
 
             if (nodeIsLeftOfPoint(queryPoint, node)) {
-                champion = nearest_recursive(node.left, queryPoint, champion);
-                champion = nearest_recursive(node.right, queryPoint, champion);
+                champion = nearest(node.left, queryPoint, champion);
+                champion = nearest(node.right, queryPoint, champion);
             } else {
-                champion = nearest_recursive(node.right, queryPoint, champion);
-                champion = nearest_recursive(node.left, queryPoint, champion);
+                champion = nearest(node.right, queryPoint, champion);
+                champion = nearest(node.left, queryPoint, champion);
             }
         }
 
