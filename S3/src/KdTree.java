@@ -10,26 +10,25 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
 
 public class KdTree {
-    // construct an empty set of points
+    private int size;
     
     private Node root;             // root of BST
 
     private class Node {
         private Point2D key;           // sorted by key
         private Node left, right;  // left and right subtrees
-        private int size;          // number of nodes in subtree
         private RectHV rect;
         private int level;
     
-        public Node(Point2D key, int size, int level, RectHV rect) {
+        public Node(Point2D key, int level, RectHV rect) {
             this.key = key;
-            this.size = size;
             this.rect = rect;
             this.level = level;
         }
     }
 
     public KdTree() {
+        this.size = 0;
     }
 
     // is the set empty?
@@ -39,12 +38,7 @@ public class KdTree {
 
     // number of points in the set
     public int size() {
-        return size(root);
-    }
-
-    private int size(Node node){
-        if(node == null) return 0;
-        else return node.size;
+        return this.size;
     }
 
     public void insert(Point2D p) {
@@ -57,7 +51,8 @@ public class KdTree {
     
     private Node insert(Node node, Point2D point, boolean compareX, RectHV rect) {
         if (node == null) {
-            return new Node(point, 1, 0, new RectHV(0, 0, 1, 1));
+            this.size ++;
+            return new Node(point, 0, new RectHV(0, 0, 1, 1));
         }
     
         if (point.equals(node.key)) {
@@ -85,7 +80,6 @@ public class KdTree {
             node.right = insert(node.right, point, !compareX, rightRect);
         }
         
-        node.size = 1 + size(node.left) + size(node.right);
         node.level ++;
         return node;
     }
