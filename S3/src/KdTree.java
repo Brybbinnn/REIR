@@ -75,7 +75,8 @@ public class KdTree {
             leftRect = new RectHV(rect.xmin(), cmp, cmp, cmp);
             node.left = insert(node.left, point, !compareX, leftRect);
         } else {
-            node.right = insert(node.right, point, !compareX);
+            rightRect = new RectHV(cmp, cmp, cmp, cmp)
+            node.right = insert(node.right, point, !compareX, rightRect);
         }
     
         node.size = 1 + size(node.left) + size(node.right);
