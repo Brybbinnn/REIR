@@ -129,7 +129,6 @@ public class KdTree {
     private Node range(Node node, RectHV rect){
         if(node == null) return null;
         //if(rect.contains(node.key) == false) return null;
-        RectHV rec = new RectHV(0, 0, 0, 0);
         return node;
     }
 
