@@ -14,14 +14,19 @@ kt 2: 0311022350
  *  2d-tree data structure.
  **********************************************************************/
 
-If I understand the question correctly then the Note data would be same as used
-in a general implementation of a black red tree, each node containing a point of
-the Point2D datatype 
+The Node that we implemented has the standard left and right nodes, which are
+null by default, then they each save their point as a key, they also save a 
+rectangle which determines the area they cover, as well as their level
+or depth, essentially how far away they are from the root.
 
 /**********************************************************************
  *  Describe your method for range search in a kd-tree.
  **********************************************************************/
 
+In range search we followed instructions and whenever a node is checked,
+it first checks whether or not its rectangle intersects with the given
+rectangle. If not then do the same search for the left and right nodes
+recursively.
 
 /**********************************************************************
  *  Describe your method for nearest neighbor search in a kd-tree.

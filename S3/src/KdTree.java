@@ -86,6 +86,7 @@ public class KdTree {
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
+        if (p == null) throw new IllegalArgumentException("Point cannot be null");
         if(get(p) != null) return true;
         return false;
     }
