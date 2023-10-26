@@ -11,7 +11,6 @@ import edu.princeton.cs.algs4.Out;
 
 public class KdTree {
     private int size;
-    
     private Node root;             // root of BST
 
     private class Node {
@@ -87,30 +86,24 @@ public class KdTree {
     // does the set contain the point p?
     public boolean contains(Point2D p) {
         if (p == null) throw new IllegalArgumentException("Point cannot be null");
-        if(get(p) != null) return true;
-        return false;
+        return contains(root, p, true);
     }
 
-    public Point2D get(Point2D p) {
-        return get(root, p, true);
-    }
-
-    private Point2D get(Node node, Point2D point, boolean compareX) {
+    private boolean contains(Node node, Point2D point, boolean compareX) {
         //if (point == 0) throw new IllegalArgumentException("calls get() with 0 as a key");
         
-        if (node == null) return null;         //When to stop searching
+        if (node == null) return false;         //When to stop searching
+        if (node.key == point) return true;     //Check if the current node matches the point we are looking for
 
-        int cmp = point.compareTo(node.key);   //Check if the current node matches the point we are looking for
-        
-        if (cmp < 0) {
-            return get(node.left, point, !compareX);
+        int cmp;
+        if (compareX) {
+            cmp = Double.compare(point.x(), node.key.x());
+        } else {
+            cmp = Double.compare(point.y(), node.key.y());
         } 
-        else if (cmp > 0) {
-            return get(node.right, point, !compareX);
-        }
-        else {
-            return node.key;
-        }
+        
+        if (cmp < 0) return contains(node.left, point, !compareX); 
+        else return contains(node.right, point, !compareX);
     }
 
     // draw all of the points to standard draw
