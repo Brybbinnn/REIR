@@ -4,6 +4,7 @@
 import java.util.Arrays;
 
 import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
@@ -51,7 +52,7 @@ public class KdTree {
             throw new IllegalArgumentException("Point to be inserted cannot be null.");
         }
 
-        root = insert(root, p, true); // Start with level 0 (comparing x-coordinates)
+        root = insert(root, p, true, new RectHV(0, 0, 1, 1)); // Start with level 0 (comparing x-coordinates)
     }
     
     private Node insert(Node node, Point2D point, boolean compareX, RectHV rect) {
@@ -123,13 +124,18 @@ public class KdTree {
 
     // all points in the set that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
-        return null;
+        Queue<Point2D> points = new Queue<>();
+        range(root, rect, points);
+        return points;
     }
 
-    private Node range(Node node, RectHV rect){
-        if(node == null) return null;
-        //if(rect.contains(node.key) == false) return null;
-        return node;
+    private void range(Node node, RectHV  rect, Queue<Point2D> queue){
+        if(node == null) return;
+        if(node.rect.intersects(rect) == false) return;
+        
+        if(rect.contains(node.key)) queue.enqueue(node.key);
+        range(node.left, rect, queue);
+        range(node.right, rect, queue);
     }
 
     // a nearest neighbor in the set to p; null if set is empty
