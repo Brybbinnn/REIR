@@ -90,8 +90,6 @@ public class KdTree {
     }
 
     private boolean contains(Node node, Point2D point, boolean compareX) {
-        //if (point == 0) throw new IllegalArgumentException("calls get() with 0 as a key");
-        
         if (node == null) return false;         //When to stop searching
         if (node.key == point) return true;     //Check if the current node matches the point we are looking for
 

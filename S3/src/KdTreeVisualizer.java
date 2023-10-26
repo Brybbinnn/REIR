@@ -31,6 +31,7 @@ public class KdTreeVisualizer {
                     StdDraw.clear();
                     kdtree.draw();
                     StdDraw.show();
+                    StdOut.printf("%s\n", kdtree.contains(p));
                 }
             }
             StdDraw.pause(50);
