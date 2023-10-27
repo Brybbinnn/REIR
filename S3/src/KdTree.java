@@ -15,7 +15,7 @@ public class KdTree {
 
     private class Node {
         private Point2D key;           // sorted by key
-        private Node left, right;  // left and right subtrees
+        private Node left, right;  // left and right subtrees (left and below, right and above)
         private RectHV rect;
         private int level;
     
@@ -132,39 +132,41 @@ public class KdTree {
         return nearest(root, p, root.key);
     }
 
-    private Point2D nearest(Node node, Point2D queryPoint, Point2D champion) {
-        if (node == null) {
-            return champion;
+    private Point2D nearest(Node node, Point2D p, Point2D nearest) {
+        // Base case - if the current node is null, return the current closest point
+        if (node == null) return nearest;
+
+        // Check if the current node's rectangle is null (an error condition)
+        if (node.rect == null) {
+            throw new IllegalStateException("Invalid state: Node rectangle is null");
         }
 
-        double championDistance = queryPoint.distanceSquaredTo(champion);
-        double currentRectDistance = node.rect.distanceSquaredTo(queryPoint);
-
-        if (currentRectDistance < championDistance) {
-            if (node.key.distanceSquaredTo(queryPoint) < championDistance) {
-                champion = node.key;
-            }
-
-            if (nodeIsLeftOfPoint(queryPoint, node)) {
-                champion = nearest(node.left, queryPoint, champion);
-                champion = nearest(node.right, queryPoint, champion);
-            } else {
-                champion = nearest(node.right, queryPoint, champion);
-                champion = nearest(node.left, queryPoint, champion);
-            }
+        // Check if the current subtree cannot contain a closer point
+        if (node.rect.distanceSquaredTo(p) >= nearest.distanceSquaredTo(p)) {
+            return nearest;
         }
 
-        return champion;
-    }
-
-    private boolean nodeIsLeftOfPoint(Point2D point, Node node) {
-        if (node.level % 2 == 0) {
-            return point.x() < node.key.x();
-        } else {
-            return point.y() < node.key.y();
+        // If the current point is closer, update the closest point
+        if (node.key.distanceSquaredTo(p) < nearest.distanceSquaredTo(p)) {
+            nearest = node.key;
         }
-    }
 
+        // Calculate the squared distances from p to left and right children's rectangles
+        double left = node.left != null ? node.left.rect.distanceSquaredTo(p) : Double.POSITIVE_INFINITY;
+        double right = node.right != null ? node.right.rect.distanceSquaredTo(p) : Double.POSITIVE_INFINITY;
+
+         // Determine which subtree is closer and explore it first
+         if (left < right) {
+            nearest = nearest(node.left, p, nearest);
+            nearest = nearest(node.right, p, nearest);
+         } else {
+            nearest = nearest(node.right, p, nearest);
+            nearest = nearest(node.left, p, nearest);
+         }
+
+         // Return the closest point found after exploring both subtrees
+        return nearest;
+}
 
     /*******************************************************************************
      * Test client
