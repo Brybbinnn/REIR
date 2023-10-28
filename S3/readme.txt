@@ -7,7 +7,7 @@ Name 1: Grimur Arnar Ámundason
 kt 1: 130103-2430
 
 Name 2: Bryndís Gunnarsdóttir
-kt 2: 0311022350
+kt 2: 031102-2350
 
 /**********************************************************************
  *  Briefly describe the Node data type you used to implement the
@@ -59,7 +59,8 @@ bytes per RectHV: 48 bytes
 
 Total Memory = KdTree Overhead + Internal Node Memory + Point2D Memory + RectHV Memory
 
-bytes per KdTree of N points (using tilde notation):   ~ 16 bytes + 16 * M (internal nodes) bytes + N (Point2D objects) * 32 bytes + P (RectHV objects) * 48 bytes
+bytes per KdTree of N points (using tilde notation): 
+  ~ 16 bytes + 16 * M (internal nodes) bytes + N (Point2D objects) * 32 bytes + P (RectHV objects) * 48 bytes
 [include the memory for any referenced Node, Point2D and RectHV objects]
 
 
@@ -71,7 +72,10 @@ bytes per KdTree of N points (using tilde notation):   ~ 16 bytes + 16 * M (inte
  *  points or to read them in from standard input.)
  **********************************************************************/
 
-
+The expected running time to build a 2d-tree on N random points in the unit square 
+is typically O(N * log(N)), assuming a balanced tree. This time complexity is due to 
+the process of recursively dividing the points in each dimension, similar to building 
+a balanced binary search tree.
 
 /**********************************************************************
  *  How many nearest neighbor calculations can your brute-force
@@ -97,6 +101,7 @@ input1M.txt
  *  Known bugs / limitations.
  **********************************************************************/
 
+For some reason we are getting a Time Limit Exceeded and we don't understand why.
 
 /**********************************************************************
  *  Describe whatever help (if any) that you received.
@@ -105,9 +110,10 @@ input1M.txt
  *  classmates, and friends) and attribute them by name.
  **********************************************************************/
 
+help from Konráð
 
 /**********************************************************************
  *  Describe any serious problems you encountered.                    
  **********************************************************************/
 
-
+running my code :,(
