@@ -76,6 +76,12 @@ is typically O(N * log(N)), assuming a balanced tree. This time complexity is du
 the process of recursively dividing the points in each dimension, similar to building 
 a balanced binary search tree.
 
+N: 100, Time: 1 ms
+N: 1000, Time: 2 ms
+N: 10000, Time: 13 ms
+N: 100000, Time: 152 ms
+N: 1000000, Time: 1808 ms
+
 /**********************************************************************
  *  How many nearest neighbor calculations can your brute-force
  *  implementation perform per second for input100K.txt (100,000 points)
@@ -90,9 +96,9 @@ a balanced binary search tree.
                      calls to nearest() per second
                      brute force           2d-tree
 
-input100K.txt
+input100K.txt                              
 
-input1M.txt
+input1M.txt                                
 
 
 
