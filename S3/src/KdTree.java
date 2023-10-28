@@ -17,12 +17,10 @@ public class KdTree {
         private Point2D key; // sorted by key
         private Node left, right; // left and right subtrees (left and below, right and above)
         private RectHV rect;
-        private int level;
 
         public Node(Point2D key, int level, RectHV rect) {
             this.key = key;
             this.rect = rect;
-            this.level = level;
         }
     }
 
@@ -83,7 +81,6 @@ public class KdTree {
             node.right = insert(node.right, point, !compareX, rightRect);
         }
 
-        node.level++;
         return node;
     }
 
