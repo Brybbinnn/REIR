@@ -19,7 +19,7 @@ public class KdTree {
         private Node left, right; // left and right subtrees (left and below, right and above)
         private RectHV rect;
 
-        public Node(Point2D key, int level, RectHV rect) {
+        public Node(Point2D key, RectHV rect) {
             this.key = key;
             this.rect = rect;
         }
@@ -50,7 +50,7 @@ public class KdTree {
     private Node insert(Node node, Point2D point, boolean compareX, RectHV rect) {
         if (node == null) {
             this.size++;
-            return new Node(point, 0, new RectHV(0, 0, 1, 1));
+            return new Node(point, rect);
         }
 
         if (point.equals(node.key)) {
@@ -67,17 +67,17 @@ public class KdTree {
         RectHV leftRect = null, rightRect = null;
         if (cmp < 0) {
             if (compareX)
-                leftRect = new RectHV(rect.xmin(), rect.ymin(), point.x(), rect.ymax());
+                leftRect = new RectHV(rect.xmin(), rect.ymin(), node.key.x(), rect.ymax());
             else
-                leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), point.y());
+                leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), node.key.y());
 
             node.left = insert(node.left, point, !compareX, leftRect);
 
         } else {
             if (compareX)
-                rightRect = new RectHV(point.x(), rect.ymin(), rect.xmax(), rect.ymax());
+                rightRect = new RectHV(node.key.x(), rect.ymin(), rect.xmax(), rect.ymax());
             else
-                rightRect = new RectHV(rect.xmin(), point.y(), rect.xmax(), rect.ymax());
+                rightRect = new RectHV(rect.xmin(), node.key.y(), rect.xmax(), rect.ymax());
 
             node.right = insert(node.right, point, !compareX, rightRect);
         }
