@@ -32,7 +32,16 @@ recursively.
  *  Describe your method for nearest neighbor search in a kd-tree.
  **********************************************************************/
 
-
+This code finds the nearest neighbor to a given point p in a KdTree data structure. 
+It starts at the root node and recursively explores the tree. If the tree is empty, 
+it returns null. If the current node is null, it returns the current closest point 
+found so far. It checks if the current node's rectangle is null, which would indicate 
+an error. It also checks if the current subtree cannot contain a closer point, 
+based on the distance between the point p and the current closest point. 
+If a closer point is found, it updates the closest point. It then calculates the 
+squared distances from p to the left and right children's rectangles, and it 
+determines which subtree to explore first based on these distances. 
+Finally, it returns the closest point found after exploring both subtrees.
 
 /**********************************************************************
  *  Give the total memory usage in bytes (using tilde notation and 
@@ -46,9 +55,11 @@ recursively.
 
 bytes per Point2D: 32 bytes
 
-bytes per RectHV:
+bytes per RectHV: 48 bytes
 
-bytes per KdTree of N points (using tilde notation):   ~
+Total Memory = KdTree Overhead + Internal Node Memory + Point2D Memory + RectHV Memory
+
+bytes per KdTree of N points (using tilde notation):   ~ 16 bytes + 16 * M (internal nodes) bytes + N (Point2D objects) * 32 bytes + P (RectHV objects) * 48 bytes
 [include the memory for any referenced Node, Point2D and RectHV objects]
 
 
