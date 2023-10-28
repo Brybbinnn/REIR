@@ -11,14 +11,14 @@ import edu.princeton.cs.algs4.Out;
 
 public class KdTree {
     private int size;
-    private Node root;             // root of BST
+    private Node root; // root of BST
 
     private class Node {
-        private Point2D key;           // sorted by key
-        private Node left, right;  // left and right subtrees (left and below, right and above)
+        private Point2D key; // sorted by key
+        private Node left, right; // left and right subtrees (left and below, right and above)
         private RectHV rect;
         private int level;
-    
+
         public Node(Point2D key, int level, RectHV rect) {
             this.key = key;
             this.rect = rect;
@@ -47,61 +47,70 @@ public class KdTree {
 
         root = insert(root, p, true, new RectHV(0, 0, 1, 1)); // Start with level 0 (comparing x-coordinates)
     }
-    
+
     private Node insert(Node node, Point2D point, boolean compareX, RectHV rect) {
         if (node == null) {
-            this.size ++;
+            this.size++;
             return new Node(point, 0, new RectHV(0, 0, 1, 1));
         }
-    
+
         if (point.equals(node.key)) {
             return node; // Avoid inserting duplicates
         }
-    
+
         int cmp;
         if (compareX) {
             cmp = Double.compare(point.x(), node.key.x());
         } else {
             cmp = Double.compare(point.y(), node.key.y());
         }
-    
+
         RectHV leftRect = null, rightRect = null;
         if (cmp < 0) {
-            if(compareX) leftRect = new RectHV(rect.xmin(), rect.ymin(), point.x(), rect.ymax());
-            else leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), point.y());
+            if (compareX)
+                leftRect = new RectHV(rect.xmin(), rect.ymin(), point.x(), rect.ymax());
+            else
+                leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), point.y());
 
             node.left = insert(node.left, point, !compareX, leftRect);
 
         } else {
-            if(compareX) rightRect = new RectHV(point.x(), rect.ymin(), rect.xmax(), rect.ymax());
-            else rightRect = new RectHV(rect.xmin(), point.y(), rect.xmax(), rect.ymax());
-            
+            if (compareX)
+                rightRect = new RectHV(point.x(), rect.ymin(), rect.xmax(), rect.ymax());
+            else
+                rightRect = new RectHV(rect.xmin(), point.y(), rect.xmax(), rect.ymax());
+
             node.right = insert(node.right, point, !compareX, rightRect);
         }
-        
-        node.level ++;
+
+        node.level++;
         return node;
     }
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
-        if (p == null) throw new IllegalArgumentException("Point cannot be null");
+        if (p == null)
+            throw new IllegalArgumentException("Point cannot be null");
         return contains(root, p, true);
     }
 
     private boolean contains(Node node, Point2D point, boolean compareX) {
-        if (node == null) return false;         //When to stop searching
-        if (node.key == point) return true;     //Check if the current node matches the point we are looking for
+        if (node == null)
+            return false; // When to stop searching
+        if (node.key.compareTo(point) == 0)
+            return true; // Check if the current node matches the point we are looking for
 
         int cmp;
         if (compareX) {
             cmp = Double.compare(point.x(), node.key.x());
         } else {
             cmp = Double.compare(point.y(), node.key.y());
-        } 
-        
-        if (cmp < 0) return contains(node.left, point, !compareX); 
-        else return contains(node.right, point, !compareX);
+        }
+
+        if (cmp < 0)
+            return contains(node.left, point, !compareX);
+        else
+            return contains(node.right, point, !compareX);
     }
 
     // draw all of the points to standard draw
@@ -115,17 +124,20 @@ public class KdTree {
         return points;
     }
 
-    private void range(Node node, RectHV  rect, Queue<Point2D> queue){
-        if(node == null) return;
-        if(node.rect.intersects(rect) == false) return;
-        
-        if(rect.contains(node.key)) queue.enqueue(node.key);
+    private void range(Node node, RectHV rect, Queue<Point2D> queue) {
+        if (node == null)
+            return;
+        if (node.rect.intersects(rect) == false)
+            return;
+
+        if (rect.contains(node.key))
+            queue.enqueue(node.key);
         range(node.left, rect, queue);
         range(node.right, rect, queue);
     }
 
     // a nearest neighbor in the set to p; null if set is empty
-   public Point2D nearest(Point2D p) {
+    public Point2D nearest(Point2D p) {
         if (isEmpty()) {
             return null;
         }
@@ -134,7 +146,8 @@ public class KdTree {
 
     private Point2D nearest(Node node, Point2D p, Point2D nearest) {
         // Base case - if the current node is null, return the current closest point
-        if (node == null) return nearest;
+        if (node == null)
+            return nearest;
 
         // Check if the current node's rectangle is null (an error condition)
         if (node.rect == null) {
@@ -151,22 +164,23 @@ public class KdTree {
             nearest = node.key;
         }
 
-        // Calculate the squared distances from p to left and right children's rectangles
+        // Calculate the squared distances from p to left and right children's
+        // rectangles
         double left = node.left != null ? node.left.rect.distanceSquaredTo(p) : Double.POSITIVE_INFINITY;
         double right = node.right != null ? node.right.rect.distanceSquaredTo(p) : Double.POSITIVE_INFINITY;
 
-         // Determine which subtree is closer and explore it first
-         if (left < right) {
+        // Determine which subtree is closer and explore it first
+        if (left < right) {
             nearest = nearest(node.left, p, nearest);
             nearest = nearest(node.right, p, nearest);
-         } else {
+        } else {
             nearest = nearest(node.right, p, nearest);
             nearest = nearest(node.left, p, nearest);
-         }
+        }
 
-         // Return the closest point found after exploring both subtrees
+        // Return the closest point found after exploring both subtrees
         return nearest;
-}
+    }
 
     /*******************************************************************************
      * Test client
