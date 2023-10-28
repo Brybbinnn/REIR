@@ -16,8 +16,7 @@ kt 2: 031102-2350
 
 The Node that we implemented has the standard left and right nodes, which are
 null by default, then they each save their point as a key, they also save a 
-rectangle which determines the area they cover, as well as their level
-or depth, essentially how far away they are from the root.
+rectangle which determines the area they cover.
 
 /**********************************************************************
  *  Describe your method for range search in a kd-tree.
