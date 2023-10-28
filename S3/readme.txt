@@ -59,7 +59,8 @@ bytes per RectHV: 48 bytes
 Total Memory = KdTree Overhead + Internal Node Memory + Point2D Memory + RectHV Memory
 
 bytes per KdTree of N points (using tilde notation): 
-  ~ 16 bytes + 16 * M (internal nodes) bytes + N (Point2D objects) * 32 bytes + P (RectHV objects) * 48 bytes
+  ~ 16 bytes + 16 * M (internal nodes) bytes + N (Point2D objects) * 32 bytes + P (RectHV objects) * 48 bytes 
+  ~ 112 bytes
 [include the memory for any referenced Node, Point2D and RectHV objects]
 
 
