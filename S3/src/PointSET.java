@@ -71,7 +71,7 @@ public class PointSET {
             if (nearest_point == null) {
                 nearest_point = point2d;
             }
-            if (p.distanceTo(point2d) < p.distanceTo(nearest_point)){
+            if (p.distanceSquaredTo(point2d) < p.distanceSquaredTo(nearest_point)){
                 nearest_point = point2d;
             }
         }
