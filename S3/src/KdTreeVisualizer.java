@@ -32,6 +32,8 @@ public class KdTreeVisualizer {
                     kdtree.draw();
                     StdDraw.show();
                     StdOut.printf("%s\n", kdtree.contains(p));
+                    Point2D testPoint = new Point2D(0.5, 0.5);
+                    StdOut.printf("%s\n", kdtree.nearest(testPoint));
                 }
             }
             StdDraw.pause(50);
