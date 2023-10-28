@@ -6,6 +6,7 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Out;
 
@@ -111,7 +112,35 @@ public class KdTree {
     }
 
     // draw all of the points to standard draw
+    // draw all of the points to standard draw
     public void draw() {
+        draw(root, true);
+    }
+
+    private void draw(Node node, boolean compareX) {
+        if (node == null) return;
+        // Draw point
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(.02);
+        node.key.draw();
+
+        // Draw line
+        // vertical line
+        if (compareX) { 
+            StdDraw.setPenColor(StdDraw.RED);
+            StdDraw.setPenRadius();
+            StdDraw.line(node.key.x(), node.rect.ymin(), node.key.x(), node.rect.ymax());
+
+        } else 
+        // horizontal
+        { 
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.setPenRadius();
+            StdDraw.line(node.rect.xmin(), node.key.y(), node.rect.xmax(), node.key.y());
+        }
+
+        draw(node.left, !compareX);
+        draw(node.right, !compareX);
     }
 
     // all points in the set that are inside the rectangle
@@ -129,8 +158,11 @@ public class KdTree {
 
         if (rect.contains(node.key))
             queue.enqueue(node.key);
-        range(node.left, rect, queue);
-        range(node.right, rect, queue);
+
+        if (node.rect.intersects(rect)) {
+            range(node.left, rect, queue);
+            range(node.right, rect, queue);
+        }
     }
 
     // a nearest neighbor in the set to p; null if set is empty
@@ -168,11 +200,21 @@ public class KdTree {
 
         // Determine which subtree is closer and explore it first
         if (left < right) {
+            // Explore the closer subtree
             nearest = nearest(node.left, p, nearest);
-            nearest = nearest(node.right, p, nearest);
+    
+            // Check if we need to explore the other subtree
+            if (right < nearest.distanceSquaredTo(p)) {
+                nearest = nearest(node.right, p, nearest);
+            }
         } else {
+            // Explore the closer subtree
             nearest = nearest(node.right, p, nearest);
-            nearest = nearest(node.left, p, nearest);
+    
+            // Check if we need to explore the other subtree
+            if (left < nearest.distanceSquaredTo(p)) {
+                nearest = nearest(node.left, p, nearest);
+            }
         }
 
         // Return the closest point found after exploring both subtrees
