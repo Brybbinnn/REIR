@@ -96,17 +96,20 @@ N: 1000000, Time: 1808 ms
                      calls to nearest() per second
                      brute force           2d-tree
 
-input100K.txt                              
+input100K.txt        33,333-344,828 calls  253-579 calls
 
-input1M.txt                                
+input1M.txt          33,333-227,273 calls  12.4-13.28 calls                      
 
+It is evident that as N grows the qualitative difference in efficiency becomes
+more apparent. Clearly from the data displayed above, the efficieny of the KdTree
+is magnitudes greater than the brute force method.
 
+The Operations per second were determined by having the required amount of inputs
+and then calculating the time between operations. 
 
 /**********************************************************************
  *  Known bugs / limitations.
  **********************************************************************/
-
-For some reason we are getting a Time Limit Exceeded and we don't understand why.
 
 /**********************************************************************
  *  Describe whatever help (if any) that you received.
@@ -115,10 +118,8 @@ For some reason we are getting a Time Limit Exceeded and we don't understand why
  *  classmates, and friends) and attribute them by name.
  **********************************************************************/
 
-help from Konráð
+Help with understanding the assignment better came from Konráð
 
 /**********************************************************************
  *  Describe any serious problems you encountered.                    
  **********************************************************************/
-
-running my code :,(
